@@ -1,6 +1,6 @@
 package org.hibernatespatial.test;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * Interface for persistent entities in

@@ -25,7 +25,7 @@
 
 package org.hibernatespatial.sqlserver.convertors;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * Decodes native database objects to geometries of type T.

@@ -235,7 +235,7 @@
     mvn dependency:list
     ....
     [INFO]    antlr:antlr:jar:2.7.6:compile
-    [INFO]    com.vividsolutions:jts:jar:1.11:compile
+    [INFO]    org.locationtech:jts:jar:1.11:compile
     [INFO]    commons-collections:commons-collections:jar:3.1:compile
     [INFO]    dom4j:dom4j:jar:1.6.1:compile
     [INFO]    javassist:javassist:jar:3.11.0.GA:compile
@@ -274,7 +274,7 @@
 
     import java.util.Date;
 
-    import com.vividsolutions.jts.geom.Point;
+    import org.locationtech.jts.geom.Point;
 
     public class Event {
         private Long id;
@@ -488,10 +488,10 @@
 
     import java.util.Date;
 
-    import com.vividsolutions.jts.geom.Point;
-    import com.vividsolutions.jts.geom.Geometry;
-    import com.vividsolutions.jts.io.WKTReader;
-    import com.vividsolutions.jts.io.ParseException;
+    import org.locationtech.jts.geom.Point;
+    import org.locationtech.jts.geom.Geometry;
+    import org.locationtech.jts.io.WKTReader;
+    import org.locationtech.jts.io.ParseException;
 
     import util.HibernateUtil;
 
@@ -553,7 +553,7 @@
     <code>EventManger</code>
     implementation of the Hibernate Tutorial so that it stores
     a point for the event. The point is given as a String in the Well-Known Text (WKT) format. See
-    <a href="http://www.vividsolutions.com/jts/javadoc/com/vividsolutions/jts/io/WKTReader.html">the JTS
+    <a href="http://www.vividsolutions.com/jts/javadoc/org.locationtech/jts/io/WKTReader.html">the JTS
         WTKReader JavaDoc</a> for more information about the WTK format.
         (The <code>assemble()</code> method is necessary because the Maven exec plugin
         parses string with spaces as a list of command-line arguments.)
@@ -866,7 +866,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 @Table(name = "EVENTS")

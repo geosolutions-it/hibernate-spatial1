@@ -24,7 +24,7 @@
  */
 package org.hibernatespatial.cfg;
 
-import com.vividsolutions.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.hibernatespatial.mgeom.MGeometryFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

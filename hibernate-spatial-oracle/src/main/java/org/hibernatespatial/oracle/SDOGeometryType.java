@@ -28,8 +28,8 @@
  */
 package org.hibernatespatial.oracle;
 
-import com.vividsolutions.jts.algorithm.CGAlgorithms;
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.algorithm.CGAlgorithms;
+import org.locationtech.jts.geom.*;
 import org.hibernate.HibernateException;
 import org.hibernatespatial.AbstractDBGeometryType;
 import org.hibernatespatial.Circle;

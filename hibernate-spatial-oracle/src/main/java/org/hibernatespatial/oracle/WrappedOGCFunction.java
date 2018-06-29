@@ -25,7 +25,7 @@
 
 package org.hibernatespatial.oracle;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.engine.SessionFactoryImplementor;
 import org.hibernate.type.Type;

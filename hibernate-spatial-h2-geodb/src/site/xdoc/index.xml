@@ -32,7 +32,7 @@
 					opengeo
 					repository. To use version 0.4, you have to include the
 					GeoTools Maven repository (
-					<a href="http://repo.opengeo.org/com/vividsolutions/jts/1.12-SNAPSHOT/">http://repo.opengeo.org/com/vividsolutions/jts/1.12-SNAPSHOT/
+					<a href="http://repo.opengeo.org/org.locationtech/jts/1.12-SNAPSHOT/">http://repo.opengeo.org/org.locationtech/jts/1.12-SNAPSHOT/
 					</a>
 					) and you cannot use other JTS versions.
 				</li>

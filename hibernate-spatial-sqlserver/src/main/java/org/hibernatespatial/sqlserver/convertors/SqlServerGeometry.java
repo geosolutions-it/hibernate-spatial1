@@ -25,7 +25,7 @@
 
 package org.hibernatespatial.sqlserver.convertors;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Coordinate;
 import org.hibernatespatial.mgeom.MCoordinate;
 
 import java.nio.ByteBuffer;

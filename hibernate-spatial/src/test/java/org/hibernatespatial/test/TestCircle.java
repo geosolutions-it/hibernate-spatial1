@@ -28,7 +28,7 @@
  */
 package org.hibernatespatial.test;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Coordinate;
 import org.hibernatespatial.Circle;
 import org.junit.Test;
 

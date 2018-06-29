@@ -28,9 +28,9 @@
  */
 package org.hibernatespatial.test.mgeom;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
+import org.locationtech.jts.geom.GeometryFactory;
 import junit.framework.TestCase;
 import org.hibernatespatial.mgeom.MCoordinate;
 import org.hibernatespatial.mgeom.MCoordinateSequenceFactory;
@@ -126,7 +126,7 @@ public class MultiMLineStringTest extends TestCase {
 
     /*
       * Class under testsuite-suite for boolean
-      * equalsExact(com.vividsolutions.jts.geom.Geometry, double)
+      * equalsExact(org.locationtech.jts.geom.Geometry, double)
       */
 
     public void testEqualsExactGeometrydouble() {
@@ -135,8 +135,8 @@ public class MultiMLineStringTest extends TestCase {
 
     /*
       * Class under testsuite-suite for void
-      * MultiLineString(com.vividsolutions.jts.geom.LineString[],
-      * com.vividsolutions.jts.geom.PrecisionModel, int)
+      * MultiLineString(org.locationtech.jts.geom.LineString[],
+      * org.locationtech.jts.geom.PrecisionModel, int)
       */
 
     public void testMultiLineStringLineStringArrayPrecisionModelint() {
@@ -145,8 +145,8 @@ public class MultiMLineStringTest extends TestCase {
 
     /*
       * Class under testsuite-suite for void
-      * MultiLineString(com.vividsolutions.jts.geom.LineString[],
-      * com.vividsolutions.jts.geom.GeometryFactory)
+      * MultiLineString(org.locationtech.jts.geom.LineString[],
+      * org.locationtech.jts.geom.GeometryFactory)
       */
 
     public void testMultiLineStringLineStringArrayGeometryFactory() {

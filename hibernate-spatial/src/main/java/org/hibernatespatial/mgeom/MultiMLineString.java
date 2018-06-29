@@ -24,7 +24,7 @@
  */
 package org.hibernatespatial.mgeom;
 
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.geom.*;
 
 public class MultiMLineString extends MultiLineString implements MGeometry {
 
@@ -137,7 +137,7 @@ public class MultiMLineString extends MultiLineString implements MGeometry {
         double mval = Double.NaN;
         double dist = Double.POSITIVE_INFINITY;
 
-        com.vividsolutions.jts.geom.Point p = this.getFactory().createPoint(co);
+        org.locationtech.jts.geom.Point p = this.getFactory().createPoint(co);
 
         // find points within tolerance for getMatCoordinate
         for (int i = 0; i < this.getNumGeometries(); i++) {

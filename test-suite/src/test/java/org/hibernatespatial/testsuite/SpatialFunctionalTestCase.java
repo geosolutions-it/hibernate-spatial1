@@ -1,6 +1,6 @@
 package org.hibernatespatial.testsuite;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;

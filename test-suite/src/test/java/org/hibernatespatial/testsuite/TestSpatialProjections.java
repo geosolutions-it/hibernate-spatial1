@@ -27,7 +27,7 @@
 
 package org.hibernatespatial.testsuite;
 
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Polygon;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -28,9 +28,9 @@
  */
 package org.hibernatespatial.postgis;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.hibernatespatial.AbstractDBGeometryType;
 import org.hibernatespatial.HBSpatialExtension;
 import org.hibernatespatial.mgeom.MCoordinate;
@@ -81,7 +81,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
 
         if (object instanceof PGgeometry) {
             PGgeometry geom = (PGgeometry) object;
-            com.vividsolutions.jts.geom.Geometry out = null;
+            org.locationtech.jts.geom.Geometry out = null;
             switch (geom.getGeoType()) {
                 case org.postgis.Geometry.POINT:
                     out = convertPoint((org.postgis.Point) geom.getGeometry());
@@ -184,7 +184,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
         ringCoords[2] = is3D ? new Coordinate(ur.x, ur.y, ur.z) : new Coordinate(ur.x, ur.y);
         ringCoords[3] = is3D ? new Coordinate(ll.x, ur.y, ur.z) : new Coordinate(ll.x, ur.y);
         ringCoords[4] = is3D ? new Coordinate(ll.x, ll.y, ll.z) : new Coordinate(ll.x, ll.y);
-        com.vividsolutions.jts.geom.LinearRing shell = getGeometryFactory()
+        org.locationtech.jts.geom.LinearRing shell = getGeometryFactory()
                 .createLinearRing(ringCoords);
         return getGeometryFactory().createPolygon(shell, null);
     }
@@ -192,47 +192,47 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
 
     private Geometry convertGeometryCollection(GeometryCollection collection) {
         org.postgis.Geometry[] geometries = collection.getGeometries();
-        com.vividsolutions.jts.geom.Geometry[] jtsGeometries = new com.vividsolutions.jts.geom.Geometry[geometries.length];
+        org.locationtech.jts.geom.Geometry[] jtsGeometries = new org.locationtech.jts.geom.Geometry[geometries.length];
         for (int i = 0; i < geometries.length; i++) {
             jtsGeometries[i] = convert2JTS(geometries[i]);
             //TODO  - refactor this so the following line is not necessary
             jtsGeometries[i].setSRID(0); // convert2JTS sets SRIDs, but constituent geometries in a collection must have srid  == 0 
         }
-        com.vividsolutions.jts.geom.GeometryCollection jtsGCollection = getGeometryFactory()
+        org.locationtech.jts.geom.GeometryCollection jtsGCollection = getGeometryFactory()
                 .createGeometryCollection(jtsGeometries);
         return jtsGCollection;
     }
 
     private Geometry convertMultiPolygon(MultiPolygon pgMultiPolygon) {
-        com.vividsolutions.jts.geom.Polygon[] polygons = new com.vividsolutions.jts.geom.Polygon[pgMultiPolygon
+        org.locationtech.jts.geom.Polygon[] polygons = new org.locationtech.jts.geom.Polygon[pgMultiPolygon
                 .numPolygons()];
 
         for (int i = 0; i < polygons.length; i++) {
             Polygon pgPolygon = pgMultiPolygon.getPolygon(i);
-            polygons[i] = (com.vividsolutions.jts.geom.Polygon) convertPolygon(pgPolygon);
+            polygons[i] = (org.locationtech.jts.geom.Polygon) convertPolygon(pgPolygon);
         }
 
-        com.vividsolutions.jts.geom.MultiPolygon out = getGeometryFactory()
+        org.locationtech.jts.geom.MultiPolygon out = getGeometryFactory()
                 .createMultiPolygon(polygons);
         return out;
     }
 
     private Geometry convertMultiPoint(MultiPoint pgMultiPoint) {
-        com.vividsolutions.jts.geom.Point[] points = new com.vividsolutions.jts.geom.Point[pgMultiPoint
+        org.locationtech.jts.geom.Point[] points = new org.locationtech.jts.geom.Point[pgMultiPoint
                 .numPoints()];
 
         for (int i = 0; i < points.length; i++) {
             points[i] = convertPoint(pgMultiPoint.getPoint(i));
         }
-        com.vividsolutions.jts.geom.MultiPoint out = getGeometryFactory()
+        org.locationtech.jts.geom.MultiPoint out = getGeometryFactory()
                 .createMultiPoint(points);
         out.setSRID(pgMultiPoint.srid);
         return out;
     }
 
-    private com.vividsolutions.jts.geom.Geometry convertMultiLineString(
+    private org.locationtech.jts.geom.Geometry convertMultiLineString(
             MultiLineString mlstr) {
-        com.vividsolutions.jts.geom.MultiLineString out;
+        org.locationtech.jts.geom.MultiLineString out;
         if (mlstr.haveMeasure) {
             MLineString[] lstrs = new MLineString[mlstr.numLines()];
             for (int i = 0; i < mlstr.numLines(); i++) {
@@ -242,7 +242,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
             }
             out = getGeometryFactory().createMultiMLineString(lstrs);
         } else {
-            com.vividsolutions.jts.geom.LineString[] lstrs = new com.vividsolutions.jts.geom.LineString[mlstr
+            org.locationtech.jts.geom.LineString[] lstrs = new org.locationtech.jts.geom.LineString[mlstr
                     .numLines()];
             for (int i = 0; i < mlstr.numLines(); i++) {
                 lstrs[i] = getGeometryFactory().createLineString(
@@ -253,14 +253,14 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
         return out;
     }
 
-    protected com.vividsolutions.jts.geom.Geometry convertPolygon(
+    protected org.locationtech.jts.geom.Geometry convertPolygon(
             Polygon polygon) {
-        com.vividsolutions.jts.geom.LinearRing shell = getGeometryFactory()
+        org.locationtech.jts.geom.LinearRing shell = getGeometryFactory()
                 .createLinearRing(
                         toJTSCoordinates(polygon.getRing(0).getPoints()));
-        com.vividsolutions.jts.geom.Polygon out = null;
+        org.locationtech.jts.geom.Polygon out = null;
         if (polygon.numRings() > 1) {
-            com.vividsolutions.jts.geom.LinearRing[] rings = new com.vividsolutions.jts.geom.LinearRing[polygon
+            org.locationtech.jts.geom.LinearRing[] rings = new org.locationtech.jts.geom.LinearRing[polygon
                     .numRings() - 1];
             for (int r = 1; r < polygon.numRings(); r++) {
                 rings[r - 1] = getGeometryFactory().createLinearRing(
@@ -273,15 +273,15 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
         return out;
     }
 
-    protected com.vividsolutions.jts.geom.Point convertPoint(Point pnt) {
-        com.vividsolutions.jts.geom.Point g = getGeometryFactory().createPoint(
+    protected org.locationtech.jts.geom.Point convertPoint(Point pnt) {
+        org.locationtech.jts.geom.Point g = getGeometryFactory().createPoint(
                 this.toJTSCoordinate(pnt));
         return g;
     }
 
-    protected com.vividsolutions.jts.geom.LineString convertLineString(
+    protected org.locationtech.jts.geom.LineString convertLineString(
             org.postgis.LineString lstr) {
-        com.vividsolutions.jts.geom.LineString out = lstr.haveMeasure ? getGeometryFactory()
+        org.locationtech.jts.geom.LineString out = lstr.haveMeasure ? getGeometryFactory()
                 .createMLineString(toJTSCoordinates(lstr.getPoints()))
                 : getGeometryFactory().createLineString(
                 toJTSCoordinates(lstr.getPoints()));
@@ -341,20 +341,20 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     public Object conv2DBGeometry(Geometry jtsGeom, Connection connection) {
         org.postgis.Geometry geom = null;
         jtsGeom = forceEmptyToGeometryCollection(jtsGeom);
-        if (jtsGeom instanceof com.vividsolutions.jts.geom.Point) {
-            geom = convertJTSPoint((com.vividsolutions.jts.geom.Point) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.LineString) {
-            geom = convertJTSLineString((com.vividsolutions.jts.geom.LineString) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.MultiLineString) {
-            geom = convertJTSMultiLineString((com.vividsolutions.jts.geom.MultiLineString) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.Polygon) {
-            geom = convertJTSPolygon((com.vividsolutions.jts.geom.Polygon) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.MultiPoint) {
-            geom = convertJTSMultiPoint((com.vividsolutions.jts.geom.MultiPoint) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.MultiPolygon) {
-            geom = convertJTSMultiPolygon((com.vividsolutions.jts.geom.MultiPolygon) jtsGeom);
-        } else if (jtsGeom instanceof com.vividsolutions.jts.geom.GeometryCollection) {
-            geom = convertJTSGeometryCollection((com.vividsolutions.jts.geom.GeometryCollection) jtsGeom);
+        if (jtsGeom instanceof org.locationtech.jts.geom.Point) {
+            geom = convertJTSPoint((org.locationtech.jts.geom.Point) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.LineString) {
+            geom = convertJTSLineString((org.locationtech.jts.geom.LineString) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.MultiLineString) {
+            geom = convertJTSMultiLineString((org.locationtech.jts.geom.MultiLineString) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.Polygon) {
+            geom = convertJTSPolygon((org.locationtech.jts.geom.Polygon) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.MultiPoint) {
+            geom = convertJTSMultiPoint((org.locationtech.jts.geom.MultiPoint) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.MultiPolygon) {
+            geom = convertJTSMultiPolygon((org.locationtech.jts.geom.MultiPolygon) jtsGeom);
+        } else if (jtsGeom instanceof org.locationtech.jts.geom.GeometryCollection) {
+            geom = convertJTSGeometryCollection((org.locationtech.jts.geom.GeometryCollection) jtsGeom);
         }
 
         if (geom != null)
@@ -381,10 +381,10 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private MultiPolygon convertJTSMultiPolygon(
-            com.vividsolutions.jts.geom.MultiPolygon multiPolygon) {
+            org.locationtech.jts.geom.MultiPolygon multiPolygon) {
         Polygon[] pgPolygons = new Polygon[multiPolygon.getNumGeometries()];
         for (int i = 0; i < pgPolygons.length; i++) {
-            pgPolygons[i] = convertJTSPolygon((com.vividsolutions.jts.geom.Polygon) multiPolygon
+            pgPolygons[i] = convertJTSPolygon((org.locationtech.jts.geom.Polygon) multiPolygon
                     .getGeometryN(i));
         }
         MultiPolygon mpg = new MultiPolygon(pgPolygons);
@@ -393,10 +393,10 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private MultiPoint convertJTSMultiPoint(
-            com.vividsolutions.jts.geom.MultiPoint multiPoint) {
+            org.locationtech.jts.geom.MultiPoint multiPoint) {
         Point[] pgPoints = new Point[multiPoint.getNumGeometries()];
         for (int i = 0; i < pgPoints.length; i++) {
-            pgPoints[i] = convertJTSPoint((com.vividsolutions.jts.geom.Point) multiPoint
+            pgPoints[i] = convertJTSPoint((org.locationtech.jts.geom.Point) multiPoint
                     .getGeometryN(i));
         }
         MultiPoint mp = new MultiPoint(pgPoints);
@@ -405,7 +405,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private Polygon convertJTSPolygon(
-            com.vividsolutions.jts.geom.Polygon jtsPolygon) {
+            org.locationtech.jts.geom.Polygon jtsPolygon) {
         int numRings = jtsPolygon.getNumInteriorRing();
         org.postgis.LinearRing[] rings = new org.postgis.LinearRing[numRings + 1];
         rings[0] = convertJTSLineStringToLinearRing(jtsPolygon
@@ -420,7 +420,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private LinearRing convertJTSLineStringToLinearRing(
-            com.vividsolutions.jts.geom.LineString lineString) {
+            org.locationtech.jts.geom.LineString lineString) {
         LinearRing lr = new org.postgis.LinearRing(toPoints(lineString
                 .getCoordinates()));
         lr.setSrid(lineString.getSRID());
@@ -428,7 +428,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private LineString convertJTSLineString(
-            com.vividsolutions.jts.geom.LineString string) {
+            org.locationtech.jts.geom.LineString string) {
         LineString ls = new org.postgis.LineString(toPoints(string
                 .getCoordinates()));
         if (string instanceof MGeometry) {
@@ -439,7 +439,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private MultiLineString convertJTSMultiLineString(
-            com.vividsolutions.jts.geom.MultiLineString string) {
+            org.locationtech.jts.geom.MultiLineString string) {
         org.postgis.LineString[] lines = new org.postgis.LineString[string
                 .getNumGeometries()];
         for (int i = 0; i < string.getNumGeometries(); i++) {
@@ -454,7 +454,7 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
         return mls;
     }
 
-    private Point convertJTSPoint(com.vividsolutions.jts.geom.Point point) {
+    private Point convertJTSPoint(org.locationtech.jts.geom.Point point) {
         org.postgis.Point pgPoint = new org.postgis.Point();
         pgPoint.srid = point.getSRID();
         pgPoint.x = point.getX();
@@ -475,29 +475,29 @@ public class PGGeometryUserType extends AbstractDBGeometryType {
     }
 
     private GeometryCollection convertJTSGeometryCollection(
-            com.vividsolutions.jts.geom.GeometryCollection collection) {
-        com.vividsolutions.jts.geom.Geometry currentGeom;
+            org.locationtech.jts.geom.GeometryCollection collection) {
+        org.locationtech.jts.geom.Geometry currentGeom;
         org.postgis.Geometry[] pgCollections = new org.postgis.Geometry[collection
                 .getNumGeometries()];
         for (int i = 0; i < pgCollections.length; i++) {
             currentGeom = collection.getGeometryN(i);
             currentGeom = forceEmptyToGeometryCollection(currentGeom);
-            if (currentGeom.getClass() == com.vividsolutions.jts.geom.LineString.class) {
-                pgCollections[i] = convertJTSLineString((com.vividsolutions.jts.geom.LineString) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.LinearRing.class) {
-                pgCollections[i] = convertJTSLineStringToLinearRing((com.vividsolutions.jts.geom.LinearRing) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.MultiLineString.class) {
-                pgCollections[i] = convertJTSMultiLineString((com.vividsolutions.jts.geom.MultiLineString) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.MultiPoint.class) {
-                pgCollections[i] = convertJTSMultiPoint((com.vividsolutions.jts.geom.MultiPoint) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.MultiPolygon.class) {
-                pgCollections[i] = convertJTSMultiPolygon((com.vividsolutions.jts.geom.MultiPolygon) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.Point.class) {
-                pgCollections[i] = convertJTSPoint((com.vividsolutions.jts.geom.Point) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.Polygon.class) {
-                pgCollections[i] = convertJTSPolygon((com.vividsolutions.jts.geom.Polygon) currentGeom);
-            } else if (currentGeom.getClass() == com.vividsolutions.jts.geom.GeometryCollection.class) {
-                pgCollections[i] = convertJTSGeometryCollection((com.vividsolutions.jts.geom.GeometryCollection) currentGeom);
+            if (currentGeom.getClass() == org.locationtech.jts.geom.LineString.class) {
+                pgCollections[i] = convertJTSLineString((org.locationtech.jts.geom.LineString) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.LinearRing.class) {
+                pgCollections[i] = convertJTSLineStringToLinearRing((org.locationtech.jts.geom.LinearRing) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.MultiLineString.class) {
+                pgCollections[i] = convertJTSMultiLineString((org.locationtech.jts.geom.MultiLineString) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.MultiPoint.class) {
+                pgCollections[i] = convertJTSMultiPoint((org.locationtech.jts.geom.MultiPoint) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.MultiPolygon.class) {
+                pgCollections[i] = convertJTSMultiPolygon((org.locationtech.jts.geom.MultiPolygon) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.Point.class) {
+                pgCollections[i] = convertJTSPoint((org.locationtech.jts.geom.Point) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.Polygon.class) {
+                pgCollections[i] = convertJTSPolygon((org.locationtech.jts.geom.Polygon) currentGeom);
+            } else if (currentGeom.getClass() == org.locationtech.jts.geom.GeometryCollection.class) {
+                pgCollections[i] = convertJTSGeometryCollection((org.locationtech.jts.geom.GeometryCollection) currentGeom);
             }
         }
         GeometryCollection gc = new GeometryCollection(pgCollections);

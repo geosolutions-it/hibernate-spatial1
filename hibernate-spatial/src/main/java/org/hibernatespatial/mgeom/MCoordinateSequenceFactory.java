@@ -30,9 +30,9 @@ package org.hibernatespatial.mgeom;
 
 import java.io.Serializable;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.CoordinateSequenceFactory;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
+import org.locationtech.jts.geom.CoordinateSequenceFactory;
 
 /**
  * Creates MCoordinateSequenceFactory internally represented as an array of
@@ -77,7 +77,7 @@ public class MCoordinateSequenceFactory implements CoordinateSequenceFactory,
 	 * Creates a MCoordinateSequence instance initialized to the size parameter.
 	 * Note that the dimension argument is ignored.
 	 * 
-	 * @see com.vividsolutions.jts.geom.CoordinateSequenceFactory#create(int,int)
+	 * @see org.locationtech.jts.geom.CoordinateSequenceFactory#create(int,int)
 	 */
 	public CoordinateSequence create(int size, int dimension) {
 		return new MCoordinateSequence(size);

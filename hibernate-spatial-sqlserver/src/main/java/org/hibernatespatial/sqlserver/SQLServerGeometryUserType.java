@@ -25,7 +25,7 @@
 
 package org.hibernatespatial.sqlserver;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 import org.hibernatespatial.AbstractDBGeometryType;
 import org.hibernatespatial.sqlserver.convertors.Decoders;
 import org.hibernatespatial.sqlserver.convertors.Encoders;

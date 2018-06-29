@@ -18,10 +18,12 @@
     <modules>
         <module>hibernate-spatial</module>
         <module>test-suite</module>
+<!--
         <module>hibernate-spatial-postgis</module>
         <module>hibernate-spatial-oracle</module>
         <module>hibernate-spatial-mysql</module>
         <module>hibernate-spatial-sqlserver</module>
+-->
         <module>hibernate-spatial-h2-geodb</module>
 
     </modules>
@@ -44,6 +46,15 @@
             <id>opengeo</id>
             <url>http://repo.opengeo.org</url>
         </repository>
+    <repository>
+      <id>boundless</id>
+      <name>Boundless Maven Repository</name>
+      <url>https://repo.boundlessgeo.com/main/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+
     </repositories>
     
     <build>
@@ -175,9 +186,9 @@
             <version>${hibernate.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.vividsolutions</groupId>
-            <artifactId>jts</artifactId>
-            <version>1.12</version>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.15.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

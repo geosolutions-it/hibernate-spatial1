@@ -25,8 +25,8 @@
 
 package org.hibernatespatial.mysql;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 import org.hibernatespatial.test.GeometryEquality;
 
 /**

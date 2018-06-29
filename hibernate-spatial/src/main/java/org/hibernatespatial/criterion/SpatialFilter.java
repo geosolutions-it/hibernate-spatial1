@@ -38,8 +38,8 @@ import org.hibernate.engine.TypedValue;
 import org.hibernatespatial.SpatialDialect;
 import org.hibernatespatial.helper.EnvelopeAdapter;
 
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * An implementation for a simple spatial filter. This <code>Criterion</code>

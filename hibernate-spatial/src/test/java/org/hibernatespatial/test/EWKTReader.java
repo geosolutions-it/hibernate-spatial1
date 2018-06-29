@@ -41,9 +41,9 @@
 
 package org.hibernatespatial.test;
 
-import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.util.Assert;
+import org.locationtech.jts.geom.*;
+import org.locationtech.jts.io.ParseException;
+import org.locationtech.jts.util.Assert;
 import org.hibernatespatial.mgeom.MCoordinate;
 import org.hibernatespatial.mgeom.MGeometryFactory;
 import org.hibernatespatial.mgeom.MLineString;
@@ -160,13 +160,13 @@ public class EWKTReader {
     }
 
     /**
-     * Reads a Well-Known Text representation of a {@link com.vividsolutions.jts.geom.Geometry}
+     * Reads a Well-Known Text representation of a {@link org.locationtech.jts.geom.Geometry}
      * from a {@link String}.
      *
      * @param wellKnownText one or more <Geometry Tagged Text>strings (see the OpenGIS
      *                      Simple Features Specification) separated by whitespace
      * @return a <code>Geometry</code> specified by <code>wellKnownText</code>
-     * @throws com.vividsolutions.jts.io.ParseException
+     * @throws org.locationtech.jts.io.ParseException
      *          if a parsing problem occurs
      */
     public Geometry read(String wellKnownText) throws ParseException {
@@ -464,7 +464,7 @@ public class EWKTReader {
      *
      * @param expected a description of what was expected
      * @throws ParseException
-     * @throws com.vividsolutions.jts.util.AssertionFailedException
+     * @throws org.locationtech.jts.util.AssertionFailedException
      *                        if an invalid token is encountered
      */
     private void parseError(String expected)
@@ -735,7 +735,7 @@ public class EWKTReader {
      * @throws IOException    if an I/O error occurs
      * @throws ParseException if an unexpected token was encountered
      */
-    private com.vividsolutions.jts.geom.MultiLineString readMultiLineStringText() throws IOException, ParseException {
+    private org.locationtech.jts.geom.MultiLineString readMultiLineStringText() throws IOException, ParseException {
 
         ArrayList lineStrings = new ArrayList();
 

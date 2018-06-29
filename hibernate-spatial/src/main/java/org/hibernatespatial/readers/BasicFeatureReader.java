@@ -24,7 +24,7 @@
  */
 package org.hibernatespatial.readers;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;

@@ -25,7 +25,7 @@
 
 package org.hibernatespatial.geodb;
 
-import com.vividsolutions.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.hibernatespatial.HBSpatialExtension;
 import org.hibernatespatial.SpatialDialect;
 import org.hibernatespatial.cfg.HSConfiguration;

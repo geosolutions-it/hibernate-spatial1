@@ -28,8 +28,8 @@
  */
 package org.hibernatespatial.mgeom;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
 
 /**
  * This coordinate class supports 4D coordinates, where the first 3 measures
@@ -41,7 +41,7 @@ import com.vividsolutions.jts.geom.CoordinateSequence;
  * substitute in the event that the Measure value is not used. In these cases
  * the Measure value shall simply be Double.NaN
  * 
- * @see com.vividsolutions.jts.geom.Coordinate
+ * @see org.locationtech.jts.geom.Coordinate
  */
 public class MCoordinate extends Coordinate {
 	/**
@@ -170,7 +170,7 @@ public class MCoordinate extends Coordinate {
 	 * 
 	 * (non-Javadoc)
 	 * 
-	 * @see com.vividsolutions.jts.geom.Coordinate#equals(java.lang.Object)
+	 * @see org.locationtech.jts.geom.Coordinate#equals(java.lang.Object)
 	 */
 	public boolean equals(Object other) {
 		if (other instanceof Coordinate) {

@@ -25,8 +25,8 @@
 
 package org.hibernatespatial.sqlserver;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
 import org.hibernatespatial.sqlserver.convertors.Decoders;
 import org.hibernatespatial.test.AbstractExpectationsFactory;
 import org.hibernatespatial.test.DataSourceUtils;

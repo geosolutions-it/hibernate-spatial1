@@ -28,7 +28,7 @@
  */
 package org.hibernatespatial.mgeom;
 
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.geom.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,7 +194,7 @@ public class MLineString extends LineString implements MGeometry {
     /*
       * (non-Javadoc)
       *
-      * @see com.vividsolutions.jts.geom.Geometry#getGeometryType()
+      * @see org.locationtech.jts.geom.Geometry#getGeometryType()
       */
 
     public String getGeometryType() {
@@ -204,7 +204,7 @@ public class MLineString extends LineString implements MGeometry {
     /*
       * (non-Javadoc)
       *
-      * @see com.vividsolutions.jts.geom.Geometry#getMatCoordinate(com.vividsolutions.jts.geom.Coordinate,
+      * @see org.locationtech.jts.geom.Geometry#getMatCoordinate(org.locationtech.jts.geom.Coordinate,
       *      double)
       */
 

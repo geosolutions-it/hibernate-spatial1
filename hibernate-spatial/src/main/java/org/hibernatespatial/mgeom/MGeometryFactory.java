@@ -28,13 +28,13 @@
  */
 package org.hibernatespatial.mgeom;
 
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.geom.*;
 
 /**
  * Extension of the GeometryFactory for constructing Geometries with Measure
  * support.
  * 
- * @see com.vividsolutions.jts.geom.GeometryFactory
+ * @see org.locationtech.jts.geom.GeometryFactory
  */
 public class MGeometryFactory extends GeometryFactory {
 
@@ -70,7 +70,7 @@ public class MGeometryFactory extends GeometryFactory {
 	 * 
 	 * @param coordinates
 	 *            array of MCoordinate defining this geometry's vertices
-	 * @see #createLineString(com.vividsolutions.jts.geom.Coordinate[])
+	 * @see #createLineString(org.locationtech.jts.geom.Coordinate[])
 	 * @return An instance of MLineString containing the coordinates
 	 */
 	public MLineString createMLineString(MCoordinate[] coordinates) {
@@ -95,7 +95,7 @@ public class MGeometryFactory extends GeometryFactory {
 	 * @param coordinates
 	 *            a CoordinateSequence possibly empty, or null
 	 * @return An MLineString instance based on the <code>coordinates</code>
-	 * @see #createLineString(com.vividsolutions.jts.geom.CoordinateSequence)
+	 * @see #createLineString(org.locationtech.jts.geom.CoordinateSequence)
 	 */
 	public MLineString createMLineString(CoordinateSequence coordinates) {
 		return new MLineString(coordinates, this);

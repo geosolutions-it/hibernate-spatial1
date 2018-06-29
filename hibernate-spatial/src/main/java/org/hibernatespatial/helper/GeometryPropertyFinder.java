@@ -3,7 +3,7 @@ package org.hibernatespatial.helper;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.type.Type;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * This <code>FinderStrategy</code> implementation returns the first

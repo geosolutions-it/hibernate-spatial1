@@ -10,8 +10,8 @@ import org.hibernatespatial.test.EWKTReader;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.ParseException;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.ParseException;
 
 /**
  * @author reinoldp

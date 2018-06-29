@@ -53,7 +53,7 @@
                 Since we use the Java Topology Suite to represent geometries, this looks like:
             </p>
             <source>
-                import com.vividsolutions.jts.geom.Geometry;
+                import org.locationtech.jts.geom.Geometry;
                 ...
                 public Class SomeGeographicClass {
                 ...

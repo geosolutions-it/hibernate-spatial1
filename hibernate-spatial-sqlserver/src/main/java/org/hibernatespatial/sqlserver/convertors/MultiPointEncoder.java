@@ -25,8 +25,8 @@
 
 package org.hibernatespatial.sqlserver.convertors;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.MultiPoint;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.MultiPoint;
 import org.hibernatespatial.mgeom.MCoordinate;
 
 

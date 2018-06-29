@@ -9,7 +9,7 @@ src/main/webapp/plancapaciteit
 src/main/webapp/WEB-INF/deploy
 src/main/webapp/WEB-INF/lib
 src/main/webapp/WEB-INF/classes
-
+.idea/
 tomcat/conf/web.xml
 
 tomcat/webapps/ROOT/WEB-INF/web.xml
