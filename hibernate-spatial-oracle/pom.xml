@@ -19,6 +19,17 @@
             <name>Finalist 3rd party</name>
             <url>https://www.intranet.finalist.com/nexus/content/repositories/thirdparty/</url>
         </repository>
+        <repository>
+          <id>geosolutions</id>
+          <name>geosolutions repository</name>
+          <url>http://maven.geo-solutions.it/</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+         <releases>
+           <enabled>true</enabled>
+         </releases>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -39,7 +50,7 @@
             <groupId>com.oracle.jdbc</groupId>
             <artifactId>ojdbc6</artifactId>
             <scope>provided</scope>
-            <version>[11.1.0.6.0,)</version>
+            <version>11.1.0.6.0</version>
         </dependency>
     </dependencies>
 </project>
